@@ -70,7 +70,5 @@ Route::get('/home', function () {
 });
 
 Route::get('/users', function () {
-    // You cannot directly call another route's closure, but you can reuse the same data logic.
-    $users = ['Alice', 'Bob', 'Charlie'];
-    return response()->json($users); // Return the same data as JSON
+    return User::all(); // Fetch all users
 });
