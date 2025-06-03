@@ -9,4 +9,8 @@ class User extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'email']; // Mass assignment fields
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
 }
