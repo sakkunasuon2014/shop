@@ -5,6 +5,8 @@ use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Http\Controllers\CategoryController;
 use App\Models\Category;
+use App\Http\Controllers\BookController;
+use App\Models\Book;
 
 Route::get('/welcome', function () {;
     return view('welcome'); // welcome.blade.php
@@ -95,3 +97,13 @@ Route::put("/category/{categoryId}", [CategoryController::class, 'update'])->nam
 Route::delete("/category/{categoryId}", [CategoryController::class, 'destroy'])->name('category.delete');
 
 Route::get('/category/{cateId}', [CategoryController::class, 'show'])->name("category.show");
+
+Route::prefix('book')->group(function () {
+    Route::get('/', [BookController::class, 'index'])->name('book.index');
+    Route::get('/create', [BookController::class, 'create'])->name('book.create');
+    Route::post('/', [BookController::class, 'store'])->name('book.store');
+    Route::get('/{book}', [BookController::class, 'show'])->name('book.show');
+    Route::get('/{book}/edit', [BookController::class, 'edit'])->name('book.edit');
+    Route::put('/{book}', [BookController::class, 'update'])->name('book.update');
+    Route::delete('/{book}', [BookController::class, 'destroy'])->name('book.destroy');
+});
