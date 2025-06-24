@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Http\Controllers\CategoryController;
 use App\Models\Category;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TodolistController;
 use App\Models\Book;
 
 Route::get('/welcome', function () {;
@@ -106,4 +108,22 @@ Route::prefix('book')->group(function () {
     Route::get('/{book}/edit', [BookController::class, 'edit'])->name('book.edit');
     Route::put('/{book}', [BookController::class, 'update'])->name('book.update');
     Route::delete('/{book}', [BookController::class, 'destroy'])->name('book.destroy');
+});
+Route::resource('/product', ProductController::class);
+Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+Route::post('/product', [ProductController::class, 'store'])->name('product.store');
+Route::get('/product/{product}', [ProductController::class, 'show'])->name('product.show');
+Route::delete('/product/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
+Route::put('/product/{product}', [ProductController::class, 'update'])->name('product.update');
+
+Route::prefix('todolists')->group(function () {
+    Route::get('/', [TodolistController::class, 'index'])->name('todolists.index');
+    Route::get('/create', [TodolistController::class, 'create'])->name('todolists.create');
+    Route::post('/', [TodolistController::class, 'store'])->name('todolists.store');
+    Route::get('/{todolists}', [TodolistController::class, 'show'])->name('todolists.show');
+    Route::get('/{todolists}/edit', [TodolistController::class, 'edit'])->name('todolists.edit');
+    Route::put('/{todolists}', [TodolistController::class, 'update'])->name('todolists.update');
+    Route::delete('/{todolists}', [TodolistController::class, 'destroy'])->name('todolists.destroy');
 });
