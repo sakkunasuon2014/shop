@@ -2,7 +2,7 @@
 
 ## Overview
 
-Laravel Shop is a full-featured e-commerce web application built with the Laravel PHP framework. This application provides a complete online shopping experience with product management, user authentication, shopping cart functionality, and order processing.
+Built a shopping platform with CRUD product management, user authentication, cart, and order processing, using RESTful APIs and MVC architecture.
 
 ## Project Structure
 
