@@ -68,26 +68,24 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        $product = Product::findOrFail($id);
-        return view('product.show')->with('products', $product);
+        return view('product.show')->with('product', $product);
     }
 
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
         $categories = array();
         foreach (Category::all() as $category) {
             $categories[$category->id] = $category->name;
         }
-        $product = Product::findOrFail($id);
         return view('product.edit')->with('product', $product)->with('categories', $categories);
     }
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:20|min:3',
@@ -98,11 +96,10 @@ class ProductController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('product/' . $id . '/edit')
+            return redirect('product/' . $product->id . '/edit')
                 ->withInput()
                 ->withErrors($validator);
         }
-        $product = Product::find($id);
         // Create The Post
         if ($request->file('image') != "") {
             $image = $request->file('image');
@@ -129,9 +126,8 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $product = Product::find($id);
         $image_path = 'img/' . $product->image;
         File::delete($image_path);
         $product->delete();
